@@ -1,0 +1,19 @@
+@Metadata.layer: #CORE
+annotate entity ZI_ACTIVITY_LOG with
+{
+  @UI.lineItem: [{ position: 10 }]
+  ActTims;
+
+  @UI.lineItem: [{ position: 20 }]
+  ActType;
+
+  @UI.lineItem: [{ position: 30 }]
+  Tcode;
+
+  @UI.lineItem: [{ position: 40 }]
+  TCodeName;
+
+  @UI.lineItem: [{ position: 50 }]
+  MessageText;
+
+}

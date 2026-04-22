@@ -1,0 +1,98 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'User Authentication Log',
+    typeNamePlural: 'User Authentication Logs',
+
+    title: {
+        type: #STANDARD,
+        label: 'User Authentication',
+        value: 'SessionId'
+    }
+}
+
+annotate entity ZIR_AUTH_LOG with
+{
+  @UI.facet: [
+      { id: 'SessionId',
+        purpose: #STANDARD,
+        type: #IDENTIFICATION_REFERENCE,
+        label: 'User Authencation Log',
+        position: 10
+      },
+      {
+        id: 'LoginInfo',
+        type: #FIELDGROUP_REFERENCE,
+        targetQualifier: 'LoginLogoutInfo',
+        label: 'Login - Logout Information',
+        position: 20
+      },
+      {
+        id: 'Activity',
+        purpose: #STANDARD,
+        position: 30,
+        label: 'User Activity Log',
+        type: #LINEITEM_REFERENCE,
+        targetElement: '_Activity'
+      }
+  ]
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  SessionId;
+
+
+  @Consumption.valueHelpDefinition: [
+  { entity: { name: 'ZI_SEARCHHELP_USERNAME', element: 'Username' } }
+  ]
+  @UI.lineItem: [{ position: 20 }]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.identification: [{ position: 15 }]
+  Username;
+
+
+  @UI.lineItem: [{ position: 30, criticality: 'LoginResultCriticality' }]
+  @UI.identification: [{ position: 20, criticality: 'LoginResultCriticality' }]
+  @UI.selectionField: [{ position: 20 }]
+  LoginResult;
+
+  @UI.hidden: true
+  LoginResultCriticality;
+
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ qualifier: 'LoginLogoutInfo', position: 10 }]
+  LoginDate;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.fieldGroup: [{ qualifier: 'LoginLogoutInfo', position: 15 }]
+  LoginTime;
+
+  @UI.lineItem: [{ position: 60, criticality: 'EventCriticality' }]
+  @UI.identification: [{ position: 25, criticality: 'EventCriticality' }]
+  LoginMessage;
+
+  @UI.lineItem: [{ position: 70 }]
+  @UI.fieldGroup: [{ qualifier: 'LoginLogoutInfo', position: 25 }]
+  LogoutTime;
+
+  @UI.lineItem: [{ position: 80 }]
+  @UI.fieldGroup: [{ qualifier: 'LoginLogoutInfo', position: 30 }]
+  LogoutDate;
+
+  @UI.identification: [{ position: 30 }]
+  TerminalId;
+
+  @UI.identification: [{ position: 35, criticality: 'EventCriticality' }]
+  EventId;
+
+  @UI.hidden: true
+  EventCriticality;
+
+  @UI.identification: [{ position: 40 }]
+  CreateAt;
+
+  @UI.identification: [{ position: 45 }]
+  CreateOn;
+
+  @UI.identification: [{ position: 50 }]
+  sendmailflag;
+}
